@@ -1,17 +1,29 @@
-import React from "react";
+import React, { useState } from "react";
+import Filter from "./Filter";
 
-function Filter({ onCategoryChange }) {
+function App() {
+  const [search, setSearch] = useState("");
+  const [category, setCategory] = useState("All");
+  const items = ["Lettuce", "Yogurt", "Swiss Cheese", "String Cheese"];
+
+  const handleSearchChange = (e) => {
+    setSearch(e.target.value);
+  };
+
+  const handleCategoryChange = (e) => {
+    setCategory(e.target.value);
+  };
+
   return (
-    <div className="Filter">
-      <input type="text" name="search" placeholder="Search..." />
-      <select name="filter" onChange={onCategoryChange}>
-        <option value="All">Filter by category</option>
-        <option value="Produce">Produce</option>
-        <option value="Dairy">Dairy</option>
-        <option value="Dessert">Dessert</option>
-      </select>
+    <div>
+      <Filter
+        search={search}
+        onSearchChange={handleSearchChange}
+        onCategoryChange={handleCategoryChange}
+        items={items}
+      />
     </div>
   );
 }
 
-export default Filter;
+export default App;
